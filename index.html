@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XiaoMi Vela 开发教学站</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/github.css" id="hljs-light">
+  <link rel="stylesheet" href="assets/github-dark.css" id="hljs-dark" disabled>
+</head>
+<body>
+  <header class="header">
+    <button class="menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+    <div class="brand">
+      <img class="logo-img" src="assets/favicon.png" alt="Vela">
+      <span>XiaoMi Vela 开发教学站 <small>· 零基础友好</small></span>
+    </div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="searchInput" type="text" placeholder="搜索章节 / 内容…" autocomplete="off">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <article class="content" id="content"></article>
+      <footer class="foot">
+        内容整理自小米 Vela 官方文档（iot.mi.com/vela）与 MDN JavaScript 指南；本站为教学用途二次编排。
+      </footer>
+    </main>
+  </div>
+
+  <script src="assets/marked.min.js"></script>
+  <script src="assets/highlight.min.js"></script>
+  <script src="assets/content.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
