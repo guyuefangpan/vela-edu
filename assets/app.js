@@ -6,6 +6,11 @@
   var content = document.getElementById("content");
   var searchInput = document.getElementById("searchInput");
   var searchResults = document.getElementById("searchResults");
+  var search = searchInput.closest(".search");
+  var overlay = document.createElement("div");
+  overlay.className = "sidebar-overlay";
+  document.body.appendChild(overlay);
+  var isMobile = function () { return window.matchMedia("(max-width: 860px)").matches; };
 
   // 扁平化页面顺序（用于上下页）
   var flatKeys = [];
@@ -212,8 +217,19 @@
     searchResults.classList.add("show");
   }
   searchInput.addEventListener("input", function () { doSearch(searchInput.value); });
+  search.addEventListener("click", function (e) {
+    if (isMobile() && !search.classList.contains("expanded")) {
+      search.classList.add("expanded");
+      searchInput.focus();
+      e.stopPropagation();
+    }
+  });
   document.addEventListener("click", function (e) {
-    if (!e.target.closest(".search")) searchResults.classList.remove("show");
+    var inSearch = e.target.closest(".search");
+    if (!inSearch) {
+      searchResults.classList.remove("show");
+      if (isMobile()) search.classList.remove("expanded");
+    }
   });
 
   // ---------- 主题：跟随系统（无手动切换）----------
@@ -233,8 +249,20 @@
   }
 
   // ---------- 移动端菜单 ----------
-  document.getElementById("menuBtn").addEventListener("click", function () {
-    sidebar.classList.toggle("open");
+  document.getElementById("menuBtn").addEventListener("click", function (e) {
+    e.stopPropagation();
+    var open = sidebar.classList.toggle("open");
+    overlay.classList.toggle("show", open);
+  });
+  overlay.addEventListener("click", function () {
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+  });
+  sidebar.addEventListener("click", function (e) {
+    if (e.target.closest(".nav-link") && isMobile()) {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("show");
+    }
   });
 
   // ---------- 启动 ----------
